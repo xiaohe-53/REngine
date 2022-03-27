@@ -1,11 +1,16 @@
 package org.rosuda.REngine;
 
+import java.io.Serializable;
+
 /** Basic class representing an object of any type in R. Each type in R in represented by a specific subclass.
  <p>
  This class defines basic accessor methods (<tt>as</tt><i>XXX</i>), type check methods (<tt>is</tt><i>XXX</i>), gives access to attributes ({@link #getAttribute}, {@link #hasAttribute}) as well as several convenience methods. If a given method is not applicable to a particular type, it will throw the {@link REXPMismatchException} exception.
  <p>This root class will throw on any accessor call and returns <code>false</code> for all type methods. This allows subclasses to override accessor and type methods selectively.
  */
-public class REXP {
+public class REXP implements Serializable {
+
+	private static final long serialVersionUID = 6725404639800325864L;
+
 	/** attribute list. This attribute should never be accessed directly. */
 	protected REXPList attr;
 
