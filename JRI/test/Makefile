@@ -1,7 +1,7 @@
 ## NOTE: the tests require rJava to be installed in the current R
 ##       since they also test the JRI/rJava connectivity
 
-CP=../../REngine.jar:../JRIEngine.jar:$(RJAVA)/java/boot:$(RJAVA)/jri/JRI.jar
+CP=../../org.rosuda.REngine.REngine.jar:../JRIEngine.jar:$(RJAVA)/java/boot:$(RJAVA)/jri/JRI.jar
 JFLAGS=-source 1.6 -target 1.6
 
 RJAVA=$(shell echo "cat(system.file(package='rJava'))"|R --slave --no-save)

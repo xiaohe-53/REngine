@@ -25,7 +25,7 @@ public class jt {
 			
 		} catch (RserveException rse) {
 			System.out.println(rse);
-/*		} catch (REXPMismatchException mme) {
+/*		} catch (org.rosuda.REngine.REXPMismatchException mme) {
 			System.out.println(mme);
 			mme.printStackTrace(); */
 		} catch (Exception e) {

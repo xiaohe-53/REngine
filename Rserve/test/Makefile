@@ -4,32 +4,32 @@ JFLAGS+=-encoding utf8 -source 1.6 -target 1.6
 
 all: test PlotDemo.class StartRserve.class
 
-../Rserve.jar: ../../REngine.jar
+../Rserve.jar: ../../org.rosuda.REngine.REngine.jar
 	$(MAKE) -C .. Rserve.jar
 
-../../REngine.jar:
-	$(MAKE) -C ../.. REngine.jar
+../../org.rosuda.REngine.REngine.jar:
+	$(MAKE) -C ../.. org.rosuda.REngine.REngine.jar
 
-test: test.class ../Rserve.jar ../../REngine.jar
-	$(JAVA) -cp ../Rserve.jar:../../REngine.jar:. test
+test: test.class ../Rserve.jar ../../org.rosuda.REngine.REngine.jar
+	$(JAVA) -cp ../Rserve.jar:../../org.rosuda.REngine.REngine.jar:. test
 
-test.class: test.java ../Rserve.jar ../../REngine.jar
-	$(JAVAC) $(JFLAGS) -d . -cp ../Rserve.jar:../../REngine.jar:. test.java
+test.class: test.java ../Rserve.jar ../../org.rosuda.REngine.REngine.jar
+	$(JAVAC) $(JFLAGS) -d . -cp ../Rserve.jar:../../org.rosuda.REngine.REngine.jar:. test.java
 
-PlotDemo.class: PlotDemo.java ../Rserve.jar ../../REngine.jar
-	$(JAVAC) $(JFLAGS) -d . -cp ../Rserve.jar:../../REngine.jar:. $<
+PlotDemo.class: PlotDemo.java ../Rserve.jar ../../org.rosuda.REngine.REngine.jar
+	$(JAVAC) $(JFLAGS) -d . -cp ../Rserve.jar:../../org.rosuda.REngine.REngine.jar:. $<
 
-PlotDemo: PlotDemo.class ../Rserve.jar ../../REngine.jar
-	$(JAVA) -cp ../Rserve.jar:../../REngine.jar:. $@
+PlotDemo: PlotDemo.class ../Rserve.jar ../../org.rosuda.REngine.REngine.jar
+	$(JAVA) -cp ../Rserve.jar:../../org.rosuda.REngine.REngine.jar:. $@
 
-jt: jt.class ../Rserve.jar ../../REngine.jar
-	$(JAVA) -cp ../Rserve.jar:../../REngine.jar:. $@
+jt: jt.class ../Rserve.jar ../../org.rosuda.REngine.REngine.jar
+	$(JAVA) -cp ../Rserve.jar:../../org.rosuda.REngine.REngine.jar:. $@
 
-jt.class: jt.java ../Rserve.jar ../../REngine.jar
-	$(JAVAC) $(JFLAGS) -d . -cp ../Rserve.jar:../../REngine.jar:. jt.java
+jt.class: jt.java ../Rserve.jar ../../org.rosuda.REngine.REngine.jar
+	$(JAVAC) $(JFLAGS) -d . -cp ../Rserve.jar:../../org.rosuda.REngine.REngine.jar:. jt.java
 
-StartRserve.class: StartRserve.java ../Rserve.jar ../../REngine.jar
-	$(JAVAC) $(JFLAGS) -d . -cp ../Rserve.jar:../../REngine.jar:. StartRserve.java
+StartRserve.class: StartRserve.java ../Rserve.jar ../../org.rosuda.REngine.REngine.jar
+	$(JAVAC) $(JFLAGS) -d . -cp ../Rserve.jar:../../org.rosuda.REngine.REngine.jar:. StartRserve.java
 
 clean:
 	rm -rf org *~ *.class

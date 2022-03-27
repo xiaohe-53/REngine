@@ -384,7 +384,7 @@ public class RConnection extends REngine {
 	return parseEvalResponse(rp);
     }
 
-    /** assign a content of a REXP to a symbol in R. The symbol is created if it doesn't exist already.
+    /** assign a content of a org.rosuda.REngine.REXP to a symbol in R. The symbol is created if it doesn't exist already.
      * @param sym symbol name. Currently assign uses CMD_setSEXP command of Rserve, i.e. the symbol value is NOT parsed. It is the responsibility of the user to make sure that the symbol name is valid in R (recall the difference between a symbol and an expression!). In fact R will always create the symbol, but it may not be accessible (examples: "bar\nfoo" or "bar$foo").
 	 * @param rexp contents
 	 */
@@ -408,7 +408,7 @@ public void assign(String sym, REXP rexp) throws RserveException {
 		if (rp!=null && rp.isOk()) return;
 		throw new RserveException(this,"assign failed",rp);
 	} catch(java.io.UnsupportedEncodingException e) {
-	    throw new RserveException(this, "unsupported encoding in assign(String,REXP)", e);
+	    throw new RserveException(this, "unsupported encoding in assign(String,org.rosuda.REngine.REXP)", e);
 	} catch (REXPMismatchException me) {
 	    throw new RserveException(this, "Error creating binary representation: "+me.getMessage(), me);
 	}
@@ -564,7 +564,7 @@ public void assign(String sym, REXP rexp) throws RserveException {
 	throw new RserveException(this,"serverShutdown failed",rp);
     }
     
-//========= REngine interface API
+//========= org.rosuda.REngine.REngine interface API
 
 public REXP parse(String text, boolean resolve) throws REngineException {
 	throw new REngineException(this, "Rserve doesn't support separate parsing step.");
@@ -615,7 +615,7 @@ public void assign(String symbol, REXP value, REXP env) throws REngineException 
 /** get a value from an environment
 @param symbol symbol name
 @param env environment
-@param resolve resolve the resulting REXP or just return a reference		
+@param resolve resolve the resulting org.rosuda.REngine.REXP or just return a reference
 @return value */
 public REXP get(String symbol, REXP env, boolean resolve) throws REngineException {
 	if (!resolve) throw new REngineException(this, "Rserve doesn't support references");
@@ -626,7 +626,7 @@ public REXP get(String symbol, REXP env, boolean resolve) throws REngineExceptio
 	}
 }
 
-/** fetch the contents of the given reference. The resulting REXP may never be REXPReference.
+/** fetch the contents of the given reference. The resulting org.rosuda.REngine.REXP may never be org.rosuda.REngine.REXPReference.
 @param ref reference to resolve
 @return resolved reference */
 public REXP resolveReference(REXP ref) throws REngineException {

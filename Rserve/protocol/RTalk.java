@@ -297,9 +297,9 @@ public class RTalk {
 	return null;
     }
 
-    /** sends a request with one REXP (single <code>DT_SEXP</code> payload)
+    /** sends a request with one org.rosuda.REngine.REXP (single <code>DT_SEXP</code> payload)
 	@param cmd command
-	@param object REXP to send
+	@param object org.rosuda.REngine.REXP to send
 	@return returned packet or <code>null</code> if something went wrong */
     public RPacket request(int cmd, REXP object) {
 	try {

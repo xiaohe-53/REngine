@@ -76,7 +76,7 @@ public class RserveTest {
     for (Object object : list) {
       if (object instanceof REXPString) {
         REXPString rexpString = (REXPString) object;
-        // Check if 10 elements have been received within the REXPString object
+        // Check if 10 elements have been received within the org.rosuda.REngine.REXPString object
         assertNotNull(rexpString);
         assertEquals(10, rexpString.length());
         // Check the value of the objects
@@ -95,11 +95,11 @@ public class RserveTest {
           }
         } else {
           // Fail if there are more than first and last element as result
-          fail("There are more elements than expected within the RList object.");
+          fail("There are more elements than expected within the org.rosuda.REngine.RList object.");
         }
       } else {
-        // Fail if the response is other than REXPString
-        fail("Could not find object of instance REXPString.");
+        // Fail if the response is other than org.rosuda.REngine.REXPString
+        fail("Could not find object of instance org.rosuda.REngine.REXPString.");
       }
     }
   }
@@ -140,10 +140,10 @@ public class RserveTest {
 
   @Test
   public void assignListsAndVectorsTest() throws RserveException, REXPMismatchException, REngineException {
-    // Initialize REXP container
+    // Initialize org.rosuda.REngine.REXP container
     final REXPInteger rexpInteger = new REXPInteger(new int[]{0, 1, 2, 3});
     final REXPDouble rexpDouble = new REXPDouble(new double[]{0.5, 1.2, 2.3, 3.0});
-    // Assign REXP container to RList
+    // Assign org.rosuda.REngine.REXP container to org.rosuda.REngine.RList
     final RList list = new RList();
     list.put("a", rexpInteger);
     list.put("b", rexpDouble);
@@ -196,7 +196,7 @@ public class RserveTest {
       assertTrue(result[2]);
     } catch (ClassCastException exception) {
       LOGGER.error(exception.getMessage());
-      fail("Could not cast REXP to REPLogical.");
+      fail("Could not cast org.rosuda.REngine.REXP to REPLogical.");
     }
 
     rexp = connection.parseAndEval("c(TRUE,FALSE,NA)");

@@ -1,4 +1,4 @@
-name: REngine
+name: org.rosuda.REngine.REngine
 
 on: push
 

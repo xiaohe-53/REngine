@@ -1,4 +1,4 @@
-REngine - Java interface to R
+org.rosuda.REngine.REngine - Java interface to R
 Copyright (C) 2004,5,6,7  Simon Urbanek
 
 This library is free software; you can redistribute it and/or

@@ -1,8 +1,8 @@
-// JRIEngine - REngine-based interface to JRI
+// JRIEngine - org.rosuda.REngine.REngine-based interface to JRI
 // Copyright(c) 2009 Simon Urbanek
 //
 // Currently it uses low-level calls from org.rosuda.JRI.Rengine, but
-// all REXP representations are created based on the org.rosuda.REngine API
+// all org.rosuda.REngine.REXP representations are created based on the org.rosuda.org.rosuda.REngine.REngine API
 
 package org.rosuda.REngine.JRI;
 
@@ -11,7 +11,7 @@ import org.rosuda.JRI.Mutex;
 import org.rosuda.JRI.RMainLoopCallbacks;
 import org.rosuda.REngine.*;
 
-/** <code>JRIEngine</code> is a <code>REngine</code> implementation using JRI (Java/R Interface).
+/** <code>JRIEngine</code> is a <code>org.rosuda.REngine.REngine</code> implementation using JRI (Java/R Interface).
  <p>
  Note that at most one JRI instance can exist in a given JVM process, because R does not support multiple threads. <code>JRIEngine</code> itself is thread-safe, so it is possible to invoke its methods from any thread. However, this is achieved by serializing all entries into R, so be aware of possible deadlock conditions if your R code calls back into Java (<code>JRIEngine</code> is re-entrant from the same thread so deadlock issues can arise only with multiple threads inteacting thorugh R). */
 public class JRIEngine extends REngine implements RMainLoopCallbacks {
@@ -150,7 +150,7 @@ public class JRIEngine extends REngine implements RMainLoopCallbacks {
 			throw new REngineException (null, "Cannot load JRI native library");
 		
 		if (Rengine.getVersion() < requiredAPIversion)
-			throw new REngineException(null, "JRI API version is too old, update rJava/JRI to match the REngine API");
+			throw new REngineException(null, "JRI API version is too old, update rJava/JRI to match the org.rosuda.REngine.REngine API");
 		
 		this.callbacks = callbacks;
 		// the default modus operandi is without event loop and with --no-save option
@@ -161,7 +161,7 @@ public class JRIEngine extends REngine implements RMainLoopCallbacks {
 			if (!rni.waitForR())
 				throw(new REngineException(this, "Unable to initialize R"));
 			if (rni.rniGetVersion() < requiredAPIversion)
-				throw(new REngineException(this, "JRI API version is too old, update rJava/JRI to match the REngine API"));
+				throw(new REngineException(this, "JRI API version is too old, update rJava/JRI to match the org.rosuda.REngine.REngine API"));
 			globalEnv = new REXPReference(this, Long.valueOf(rni.rniSpecialObject(Rengine.SO_GlobalEnv)));
 			nullValueRef = new REXPReference(this, Long.valueOf(R_NilValue = rni.rniSpecialObject(Rengine.SO_NilValue)));
 			emptyEnv = new REXPReference(this, Long.valueOf(rni.rniSpecialObject(Rengine.SO_EmptyEnv)));
@@ -189,7 +189,7 @@ public class JRIEngine extends REngine implements RMainLoopCallbacks {
 			throw new REngineException (null, "Cannot load JRI native library");
 		
 		if (Rengine.getVersion() < requiredAPIversion)
-			throw new REngineException(null, "JRI API version is too old, update rJava/JRI to match the REngine API");
+			throw new REngineException(null, "JRI API version is too old, update rJava/JRI to match the org.rosuda.REngine.REngine API");
 		// the default modus operandi is without event loop and with --no-save option
 		rni = new Rengine(args, runREPL, callbacks);
 		rniMutex = rni.getRsync();
@@ -198,7 +198,7 @@ public class JRIEngine extends REngine implements RMainLoopCallbacks {
 			if (!rni.waitForR())
 				throw(new REngineException(this, "Unable to initialize R"));
 			if (rni.rniGetVersion() < requiredAPIversion)
-				throw(new REngineException(this, "JRI API version is too old, update rJava/JRI to match the REngine API"));
+				throw(new REngineException(this, "JRI API version is too old, update rJava/JRI to match the org.rosuda.REngine.REngine API"));
 			globalEnv = new REXPReference(this, Long.valueOf(rni.rniSpecialObject(Rengine.SO_GlobalEnv)));
 			nullValueRef = new REXPReference(this, Long.valueOf(R_NilValue = rni.rniSpecialObject(Rengine.SO_NilValue)));
 			emptyEnv = new REXPReference(this, Long.valueOf(rni.rniSpecialObject(Rengine.SO_EmptyEnv)));
@@ -350,7 +350,7 @@ public class JRIEngine extends REngine implements RMainLoopCallbacks {
 	}
 
 	/** 
-	 * Turn an R pointer (long) into a REXP object.
+	 * Turn an R pointer (long) into a org.rosuda.REngine.REXP object.
 	 * 
 	 * This is the actual implementation of <code>resolveReference</code> but it works directly on the long pointers to be more efficient when performing recursive de-referencing */
 	REXP resolvePointer(long ptr) throws REngineException, REXPMismatchException {
@@ -383,9 +383,9 @@ public class JRIEngine extends REngine implements RMainLoopCallbacks {
 				// FIXME: in general, we could allow arbitrary convertors here ...
 				// Note that the jobj hack is only needed because we don't support EXTPTRSXP conversion
 				// (for a good reason - we can't separate the PTR from the R object so the only way it can
-				// live is as a reference and we don't want resolvePointer to ever return REXPReference as
+				// live is as a reference and we don't want resolvePointer to ever return org.rosuda.REngine.REXPReference as
 				// that could trigger infinite recursions), but if we did, we could allow post-processing
-				// based on the class attribute on the converted REXP.. (better, we can leverage REXPUnknown
+				// based on the class attribute on the converted org.rosuda.REngine.REXP.. (better, we can leverage org.rosuda.REngine.REXPUnknown
 				// and pass the ptr to the convertor so it can pull things like EXTPTR via rni)
 				if (jobj != 0 && oclass != null &&
 				    (oclass.equals("jobjRef") ||
@@ -514,7 +514,7 @@ public class JRIEngine extends REngine implements RMainLoopCallbacks {
 	}
 	
 	/** 
-	 * Create an R object, returning its pointer, from an REXP java object.
+	 * Create an R object, returning its pointer, from an org.rosuda.REngine.REXP java object.
 	 * 
 	 * @param value
 	 * @return long R pointer
@@ -553,7 +553,7 @@ public class JRIEngine extends REngine implements RMainLoopCallbacks {
 				if (l == null) { // no associated reference, create a new environemnt
 					long p = rni.rniParse("new.env(parent=baseenv())", 1);
 					ptr = rni.rniEval(p, 0);
-					/* TODO: should we handle REngineEvalException.ERROR and REngineEvalException.INVALID_INPUT here, for completeness */
+					/* TODO: should we handle org.rosuda.REngine.REngineEvalException.ERROR and org.rosuda.REngine.REngineEvalException.INVALID_INPUT here, for completeness */
 				} else
 					ptr = l.pointer();
 			} else if (value.isPairList()) { // LISTSXP / LANGSXP
@@ -708,7 +708,7 @@ public class JRIEngine extends REngine implements RMainLoopCallbacks {
 			if (rho == 0)
 				rho = ((Long)((REXPReference)globalEnv).getHandle()).longValue();
 			long p = rni.rniEval(rni.rniLCons(rni.rniInstallSymbol("new.env"), rni.rniCons(rho, R_NilValue, rni.rniInstallSymbol("parent"), false)), 0);
-			/* TODO: should we handle REngineEvalException.INVALID_INPUT and REngineEvalException.ERROR here, for completeness */
+			/* TODO: should we handle org.rosuda.REngine.REngineEvalException.INVALID_INPUT and org.rosuda.REngine.REngineEvalException.ERROR here, for completeness */
 			if (p != 0) rni.rniPreserve(p);
 			ref = new REXPReference(this, Long.valueOf(p));
 			if (resolve)
@@ -755,7 +755,7 @@ public class JRIEngine extends REngine implements RMainLoopCallbacks {
 	 *
 	 * @param o object to push to R
 	 * 
-	 * @return unresolved REXPReference of the newly created <code>jobjRef</code> object
+	 * @return unresolved org.rosuda.REngine.REXPReference of the newly created <code>jobjRef</code> object
 	 *         or <code>null</code> upon failure
 	 */
 	public REXPReference createRJavaRef(Object o) throws REngineException {
@@ -764,7 +764,7 @@ public class JRIEngine extends REngine implements RMainLoopCallbacks {
 			return null ;
 		}
 		
-		/* call Rengine api and make REXPReference from the result */
+		/* call Rengine api and make org.rosuda.REngine.REXPReference from the result */
 		REXPReference ref = null ; 
 		boolean obtainedLock = rniMutex.safeLock();
 		try {

@@ -4,8 +4,8 @@
   
   <groupId>org.rosuda.REngine</groupId>
   <artifactId>Rserve</artifactId>
-  <name>Rserve client back-end for REngine</name>
-  <description>Rserve client back-end implementation for REngine to access R from Java via Rserve.</description>
+  <name>Rserve client back-end for org.rosuda.REngine.REngine</name>
+  <description>Rserve client back-end implementation for org.rosuda.REngine.REngine to access R from Java via Rserve.</description>
   <version>1.8.2-SNAPSHOT</version>
 
   <url>http://github.com/s-u/REngine</url>

@@ -10,10 +10,10 @@ public class RTest {
 	public static void main(String[] args) {
 		try { 
 			// the simple initialization is done using
-			// REngine eng = REngine.engineForClass("org.rosuda.REngine.JRI.JRIEngine");
-			// but the one below allows us to see all output from R via REngineStdOutput()
+			// org.rosuda.REngine.REngine eng = org.rosuda.REngine.REngine.engineForClass("org.rosuda.org.rosuda.REngine.REngine.JRI.JRIEngine");
+			// but the one below allows us to see all output from R via org.rosuda.REngine.REngineStdOutput()
 			// However, it won't succeed if the engine doesn't support callbacks, so be prepared to fall back
-			REngine eng = REngine.engineForClass("org.rosuda.REngine.JRI.JRIEngine", args, new REngineStdOutput(), false);
+			REngine eng = REngine.engineForClass("org.rosuda.org.rosuda.REngine.REngine.JRI.JRIEngine", args, new REngineStdOutput(), false);
 
 			if (args.length > 0 && args[0].equals("--debug")) { // --debug waits for <Enter> so a debugger can be attached
 				System.out.println("R Version: " + eng.parseAndEval("R.version.string").asString());
@@ -185,7 +185,7 @@ public class RTest {
 				if (eng.parseAndEval("identical(s, c('foo', NA, 'NA'))").asInteger() != REXPLogical.TRUE)
 					throw new TestException("comparing Strings with NAs has failed");
 				System.out.println(" - OK");
-				System.out.print("  check isNA() for REXPString");
+				System.out.print("  check isNA() for org.rosuda.REngine.REXPString");
 				boolean na[] = eng.parseAndEval("s").isNA();
 				for (int i = 0; i < na.length; i++) System.out.print(" " + na[i]);
 				if (na.length != 3 || na[0] || !na[1] || na[2])
@@ -243,7 +243,7 @@ public class RTest {
 				
 				/* parse exceptions */
 				String cmd = "rnorm(10))" ; // syntax error
-				System.out.println("  eng.parse(\"rnorm(10))\", false )     ->  REngineException( \"Parse Error\" ) " ) ;
+				System.out.println("  eng.parse(\"rnorm(10))\", false )     ->  org.rosuda.REngine.REngineException( \"Parse Error\" ) " ) ;
 				boolean ok = false; 
 				try{
 					eng.parse( cmd, false ) ; 
@@ -253,7 +253,7 @@ public class RTest {
 				if( !ok ){
 					throw new TestException( "parse did not generate an exception on syntax error" ) ; 
 				}
-				System.out.println("  eng.parseAndEval(\"rnorm(10))\" )     ->  REngineException( \"Parse Error\" ) " ) ;
+				System.out.println("  eng.parseAndEval(\"rnorm(10))\" )     ->  org.rosuda.REngine.REngineException( \"Parse Error\" ) " ) ;
 				ok = false; 
 				try{
 					eng.parseAndEval( cmd ) ; 
@@ -276,9 +276,9 @@ public class RTest {
 					}
 				}
 				if( !ok ){
-					throw new TestException( "error in R did not generate REngineEvalException" ) ; 
+					throw new TestException( "error in R did not generate org.rosuda.REngine.REngineEvalException" ) ;
 				}
-				System.out.println( "   -> REngineEvalException  : ok" ) ;
+				System.out.println( "   -> org.rosuda.REngine.REngineEvalException  : ok" ) ;
 					
 				System.out.println("PASSED");
 				
@@ -307,7 +307,7 @@ public class RTest {
 					eng.parseAndEval(".jinit()");
 					REXPReference ref = ((org.rosuda.REngine.JRI.JRIEngine)eng).createRJavaRef( null );
 					if( ref != null ){
-						throw new TestException( "null object should create null REXPReference" ) ; 
+						throw new TestException( "null object should create null org.rosuda.REngine.REXPReference" ) ;
 					}
 					System.out.println("  eng.createRJavaRef(null)     ->  null : ok" ) ;
 					
@@ -348,7 +348,7 @@ public class RTest {
 				// -- Just in case the console is not UTF-8 don't display it
 				//System.out.println("  unicode text: "+t);
 				eng.assign("s", t);
-				REXP x = eng.parseAndEval("nchar(s)");
+				org.rosuda.REngine.REXP x = eng.parseAndEval("nchar(s)");
 				System.out.println("  nchar = " + x);
 				if (x == null || !x.isInteger() || x.asInteger() != 4)
 					throw new TestException("UTF-8 encoding string length test failed");
@@ -367,7 +367,7 @@ public class RTest {
 			System.exit(1);
 		} catch (REngineException ee) {
 			// something went wring in the engine
-			System.err.println("REngine exception: "+ee);
+			System.err.println("org.rosuda.REngine.REngine exception: "+ee);
 			ee.printStackTrace();
 			System.exit(1);
 		} catch (ClassNotFoundException cnfe) {

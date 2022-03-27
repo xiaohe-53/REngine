@@ -8,12 +8,12 @@ all: $(TARGETS)
 JAVAC=javac
 JFLAGS=-encoding utf8 -source 1.6 -target 1.6
 
-../REngine.jar: $(RENG_SRC)
-	make -C .. REngine.jar
+../org.rosuda.REngine.REngine.jar: $(RENG_SRC)
+	make -C .. org.rosuda.REngine.REngine.jar
 
-Rserve.jar: $(RSRV_SRC) ../REngine.jar
+Rserve.jar: $(RSRV_SRC) ../org.rosuda.REngine.REngine.jar
 	@rm -rf org
-	$(JAVAC) -d . -cp ../REngine.jar $(RSRV_SRC)
+	$(JAVAC) -d . -cp ../org.rosuda.REngine.REngine.jar $(RSRV_SRC)
 	jar fc $@ org
 	rm -rf org
 

@@ -31,11 +31,11 @@ public class REXPFactory {
     /** xpression type: S4 object
 	@since Rserve 0.5 */
     public static final int XT_S4=7;
-    /** xpression type: generic vector (RList) */
+    /** xpression type: generic vector (org.rosuda.REngine.RList) */
     public static final int XT_VECTOR=16;
-    /** xpression type: dotted-pair list (RList) */
+    /** xpression type: dotted-pair list (org.rosuda.REngine.RList) */
     public static final int XT_LIST=17;
-    /** xpression type: closure (there is no java class for that type (yet?). currently the body of the closure is stored in the content part of the REXP. Please note that this may change in the future!) */
+    /** xpression type: closure (there is no java class for that type (yet?). currently the body of the closure is stored in the content part of the org.rosuda.REngine.REXP. Please note that this may change in the future!) */
     public static final int XT_CLOS=18;
     /** xpression type: symbol name
 	@since Rserve 0.5 */
@@ -62,7 +62,7 @@ public class REXPFactory {
     public static final int XT_ARRAY_DOUBLE=33;
     /** xpression type: String[] (currently not used, Vector is used instead) */
     public static final int XT_ARRAY_STR=34;
-    /** internal use only! this constant should never appear in a REXP */
+    /** internal use only! this constant should never appear in a org.rosuda.REngine.REXP */
     public static final int XT_ARRAY_BOOL_UA=35;
     /** xpression type: RBool[] */
     public static final int XT_ARRAY_BOOL=36;
@@ -75,7 +75,7 @@ public class REXPFactory {
     /** xpression type: unknown; no assumptions can be made about the content */
     public static final int XT_UNKNOWN=48;
 
-    /** xpression type: RFactor; this XT is internally generated (ergo is does not come from Rsrv.h) to support RFactor class which is built from XT_ARRAY_INT */
+    /** xpression type: org.rosuda.REngine.RFactor; this XT is internally generated (ergo is does not come from Rsrv.h) to support org.rosuda.REngine.RFactor class which is built from XT_ARRAY_INT */
     public static final int XT_FACTOR=127; 
 
 	/** used for transport only - has attribute */
@@ -121,7 +121,7 @@ public class REXPFactory {
 		} else if (r instanceof REXPLogical) {
 			type = XT_ARRAY_BOOL;
 		} else {
-			// throw new REXPMismatchException(r, "decode");
+			// throw new org.rosuda.REngine.REXPMismatchException(r, "decode");
 			System.err.println("*** REXPFactory unable to interpret "+r);
 		}
 	}
@@ -304,7 +304,7 @@ public class REXPFactory {
 			return o;
 		}
 		if (xt==XT_VECTOR || xt==XT_VECTOR_EXP) {
-			Vector v=new Vector(); //FIXME: could we use RList?
+			Vector v=new Vector(); //FIXME: could we use org.rosuda.REngine.RList?
 			while(o<eox) {
 				REXPFactory xx=new REXPFactory();
 				o = xx.parseREXP(buf,o);
@@ -405,8 +405,8 @@ public class REXPFactory {
 		
 		if (xt==XT_CLOS) {
 			/*
-			REXP form=new REXP();
-			REXP body=new REXP();
+			org.rosuda.REngine.REXP form=new org.rosuda.REngine.REXP();
+			org.rosuda.REngine.REXP body=new org.rosuda.REngine.REXP();
 			o=parseREXP(form,buf,o);
 			o=parseREXP(body,buf,o);
 			if (o!=eox) {
@@ -437,9 +437,9 @@ public class REXPFactory {
 		return o;
     }
 
-    /** Calculates the length of the binary representation of the REXP including all headers. This is the amount of memory necessary to store the REXP via {@link #getBinaryRepresentation}.
+    /** Calculates the length of the binary representation of the org.rosuda.REngine.REXP including all headers. This is the amount of memory necessary to store the org.rosuda.REngine.REXP via {@link #getBinaryRepresentation}.
         <p>Please note that currently only XT_[ARRAY_]INT, XT_[ARRAY_]DOUBLE and XT_[ARRAY_]STR are supported! All other types will return 4 which is the size of the header.
-        @return length of the REXP including headers (4 or 8 bytes)*/
+        @return length of the org.rosuda.REngine.REXP including headers (4 or 8 bytes)*/
     public int getBinaryLength() throws REXPMismatchException {
 		int l=0;
 		int rxt = type;
@@ -450,7 +450,7 @@ public class REXPFactory {
 		
 		/*
 		if (type==XT_VECTOR && cont.asList()!=null && cont.asList().isNamed())
-			setAttribute("names",new REXPString(cont.asList().keys()));
+			setAttribute("names",new org.rosuda.REngine.REXPString(cont.asList().keys()));
 		 */
 		
 		boolean hasAttr = false;
@@ -530,11 +530,11 @@ public class REXPFactory {
 		return l+4; // add the header
     }
 
-    /** Stores the REXP in its binary (ready-to-send) representation including header into a buffer and returns the index of the byte behind the REXP.
+    /** Stores the org.rosuda.REngine.REXP in its binary (ready-to-send) representation including header into a buffer and returns the index of the byte behind the org.rosuda.REngine.REXP.
         <p>Please note that currently only XT_[ARRAY_]INT, XT_[ARRAY_]DOUBLE and XT_[ARRAY_]STR are supported! All other types will be stored as SEXP of the length 0 without any contents.
-        @param buf buffer to store the REXP binary into
-        @param off offset of the first byte where to store the REXP
-        @return the offset of the first byte behind the stored REXP */
+        @param buf buffer to store the org.rosuda.REngine.REXP binary into
+        @param off offset of the first byte where to store the org.rosuda.REngine.REXP
+        @return the offset of the first byte behind the stored org.rosuda.REngine.REXP */
     public int getBinaryRepresentation(byte[] buf, int off) throws REXPMismatchException {
 		int myl=getBinaryLength();
         boolean isLarge=(myl>0xfffff0);

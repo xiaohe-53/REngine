@@ -1,5 +1,5 @@
 //
-// PlotDemo demo - REngine and graphics
+// PlotDemo demo - org.rosuda.REngine.REngine and graphics
 //
 // $Id$
 //
@@ -42,7 +42,7 @@ public class PlotDemo extends Canvas {
             // ok, so the device should be fine - let's plot - replace this by any plotting code you desire ...
             c.parseAndEval("data(iris); attach(iris); plot(Sepal.Length, Petal.Length, col=unclass(Species)); dev.off()");
             
-			// There is no I/O API in REngine because it's actually more efficient to use R for this
+			// There is no I/O API in org.rosuda.REngine.REngine because it's actually more efficient to use R for this
 			// we limit the file size to 1MB which should be sufficient and we delete the file as well
 			xp = c.parseAndEval("r=readBin('test.jpg','raw',1024*1024); unlink('test.jpg'); r");
 			
@@ -61,7 +61,7 @@ public class PlotDemo extends Canvas {
 			c.close();
         } catch (RserveException rse) { // RserveException (transport layer - e.g. Rserve is not running)
             System.out.println(rse);
-        } catch (REXPMismatchException mme) { // REXP mismatch exception (we got something we didn't think we get)
+        } catch (REXPMismatchException mme) { // org.rosuda.REngine.REXP mismatch exception (we got something we didn't think we get)
             System.out.println(mme);
             mme.printStackTrace();
         } catch(Exception e) { // something else

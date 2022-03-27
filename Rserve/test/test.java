@@ -9,7 +9,7 @@ public class test {
     public static void main(String[] args) {
 	try {
 	    RConnection c = new RConnection();
-	    // REngine is the backend-agnostic API -- using eng instead of c makes sure that we don't use Rserve extensions inadvertently
+	    // org.rosuda.REngine.REngine is the backend-agnostic API -- using eng instead of c makes sure that we don't use Rserve extensions inadvertently
 	    REngine eng = (REngine) c;
 
 	    System.out.println(">>" + c.eval("R.version$version.string").asString() + "<<");
@@ -203,7 +203,7 @@ public class test {
 			if (eng.parseAndEval("identical(s, c('foo', '', NA, 'NA'))").asInteger() != REXPLogical.TRUE)
 				throw new TestException("comparing Strings with NAs and '' has failed");
 			System.out.println(" - OK");
-			System.out.print("  check isNA() for REXPString:");
+			System.out.print("  check isNA() for org.rosuda.REngine.REXPString:");
 			boolean na[] = eng.parseAndEval("s").isNA();
 			for (int i = 0; i < na.length; i++) System.out.print(" " + na[i]);
 			if (na.length != 4 || na[0] || na[1] || !na[2] || na[3])

@@ -1,12 +1,12 @@
 ## there are two ways to compile JRIEngine - either use
-## already installed REngine and JRI and then just
+## already installed org.rosuda.REngine.REngine and JRI and then just
 ## compile JRIEngine against those jars or use this
 ## Makefile with all org sources checked out
 ## in which case the JRIEngine.jar will implicitly
 ## contain org.rosuda.JRI classes as well
 ## However, that requires both:
 ## org/rosuda/JRI
-## org/rosuda/REngine
+## org/rosuda/org.rosuda.REngine.REngine
 
 JRI_MAIN_SRC=$(wildcard ../../*.java)
 JRIENGINE_SRC=JRIEngine.java
@@ -18,7 +18,7 @@ all: JRIEngine.jar
 
 JRIEngine.jar: $(JRI_MAIN_SRC) $(JRIENGINE_SRC)
 	rm -rf org
-	$(JAVAC) $(JFLAGS) -classpath ../REngine.jar -d . $^
+	$(JAVAC) $(JFLAGS) -classpath ../org.rosuda.REngine.REngine.jar -d . $^
 	$(JAR) fc $@ org
 
 clean:
